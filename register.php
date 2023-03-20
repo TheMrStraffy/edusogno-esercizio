@@ -2,7 +2,7 @@
 require'./config.php';
 
 if(!empty($_SESSION["id"])){
-    header("Location: dashboard.php");
+    header("Location: index.php");
 }
 if(isset($_POST['submit'])){
   $nome = addslashes($_POST["nome"]);
@@ -20,7 +20,7 @@ if(isset($_POST['submit'])){
     $userResult = mysqli_fetch_array($new_user);
     $_SESSION["login"] = true;
     $_SESSION["id"] = $userResult['id'];
-    header("Location: dashboard.php");
+    header("Location: index.php");
   }
 }
 

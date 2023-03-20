@@ -10,7 +10,7 @@ if(isset($_POST['password-reset-token']) && $_POST['email']){
 
   if($row){
     
-    $msg = "<a href='http://localhost/edusogno-esercizio/resetpass.php?email='" . $email . "'>Click To Reset Password</a>";
+    $msg = "<a href=http://localhost/edusogno-esercizio/resetpass.php?email=". $email .">Click To Reset Password</a>";
     $res = send_mail($email, 'Link Reset Password', $msg, null);
   } else{
     echo "Invalid Email Address. Go back";

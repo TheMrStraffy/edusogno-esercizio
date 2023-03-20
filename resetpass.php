@@ -1,16 +1,16 @@
 <?php 
 require './config.php';
-
-if(isset($_POST['password-reset'])){
-  $userId= $_SESSION['id'];
-  $getUserData = mysqli_query($conn, "SELECT email,password FROM utenti WHERE email='$email'");
+if($_GET['email']){
+  $userEmail = $_GET['email'];
+  $getUserData = mysqli_query($conn, "SELECT email,password FROM utenti WHERE email='$userEmail'");
   $result = mysqli_fetch_array($getUserData);
-$new_password = $_POST['new-password'];
-$email = $result['email'];
-mysqli_query($conn, "UPDATE utenti set password='$new_password' WHERE email='$email'");
-echo "<p>Password Changed!</p>";
-} else {
-echo "<p> Something went wrong </p>";
+  if(isset($_POST['password-reset'])){
+    $new_password = $_POST['new-password'];
+    mysqli_query($conn, "UPDATE utenti set password='$new_password' WHERE email='$userEmail'");
+    header("Location: login.php?message=success");
+  } else {
+    echo "<p> Something went wrong </p>";
+  }
 }
 
 include_once './partials/head.php'
@@ -29,7 +29,7 @@ include_once './partials/head.php'
 <form action="" method="post">
 
 <p>Hai Dimenticato la tua password? Inserisci l'email</p>
-<label for="email">IChange password for this Email</label>
+<label for="email">Change password for this Email</label>
 <input type="email" id="email" name="email"   disabled value="<?php echo $result['email'] ?>">
 
 <label for="password">Change your pass</label>

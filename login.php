@@ -1,7 +1,10 @@
 <?php 
 require './config.php';
 if(!empty($_SESSION["id"])){
-    header("Location: dashboard.php");
+    header("Location: index.php");
+}
+if(isset($_GET['message'])){
+    $successMessage = "You changed your password, try to log in now!";
 }
 if(isset($_POST['submit'])){
     $email = $_POST['email'];
@@ -12,7 +15,7 @@ if(isset($_POST['submit'])){
         if($password == $row["password"]){
             $_SESSION["login"] = true;
             $_SESSION["id"] = $row["id"];
-            header("Location: dashboard.php");
+            header("Location: index.php");
         } else{
             echo "<script> alert('Wrong Password'); </script>";
         }
@@ -28,6 +31,9 @@ include_once './partials/header.php';
 <main>
 
     <div class="container">
+        <?php if(!empty($successMessage))
+        echo $successMessage;
+        ?>
         <h2>Hai gia un account?</h2>
         <div class="form-container">
             <form action="" method="post">
