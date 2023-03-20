@@ -1,13 +1,18 @@
 <?php 
 require './config.php';
-var_dump($_SESSION["id"]);
+
 if(!empty($_SESSION["id"])){
   $id = $_SESSION["id"];
   $result = mysqli_query($conn, "SELECT * FROM utenti WHERE id = $id");
   $row = mysqli_fetch_assoc($result);
+  $userEmail = $row['email'];
+  $getEvents = mysqli_query($conn, "SELECT * FROM eventi WHERE attendees LIKE '%{$userEmail}%'");
+  $eventsResult = mysqli_fetch_all($getEvents);
+
+  
 
 } else {
-  // header("Location: login.php");
+  header("Location: login.php");
 }
 
 include_once './partials/head.php';
@@ -24,26 +29,17 @@ include_once './partials/header.php';
     <h2 class="welcome">Welcome <?php echo $row["nome"]; ?> </h2>
     
     <div class="card-container">
-    
-        <div class="card">
-          <h3>Nome evento</h3>
-          <p>15-10-2022 15:00</p>
-  
-          <button>JOIN</button>
-        </div>
-        <div class="card">
-          <h3>Nome evento</h3>
-          <p>15-10-2022 15:00</p>
-  
-          <button>JOIN</button>
-        </div>
-        <div class="card">
-          <h3>Nome evento</h3>
-          <p>15-10-2022 15:00</p>
-  
-          <button>JOIN</button>
-        </div>
+    <?php foreach ($eventsResult as $event): ?>
+     
+      <div class="card">
+        <h3><?php echo $event[2] ?></h3>
+        <p><?php echo $event[3] ?> </p>
+        
+        <button>JOIN</button>
       </div>
+     <? endforeach ?>
+    </div>
+
       <a href="logout.php">Logout</a>
   </div>
 </main>
