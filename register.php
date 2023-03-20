@@ -16,24 +16,18 @@ if(isset($_POST['submit'])){
   } else {
     $query = "INSERT INTO utenti (nome, cognome, email, password) VALUES('$nome', '$cognome','$email','$password' )";
     mysqli_query($conn, $query); 
+    $new_user = mysqli_query($conn, "SELECT * FROM utenti WHERE email = '$email'");
+    $userResult = mysqli_fetch_array($new_user);
+    $_SESSION["login"] = true;
+    $_SESSION["id"] = $userResult['id'];
     header("Location: dashboard.php");
   }
 }
+
+include_once './partials/head.php'
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/style.css">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css' integrity='sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==' crossorigin='anonymous'/>
-    <title>Edusogno</title>
-</head>
-
-<body>
 <header>
 <div class="logo">
     Edu<br>
@@ -67,7 +61,7 @@ if(isset($_POST['submit'])){
                 <button type="submit" name="submit">REGISTRATI</button>
             </form>
 
-            <p>Hai gia un account? Accedi <a href="login.php">Accedi</a></p>
+            <p class="one-option">Hai gia un account? <a href="login.php">Accedi</a></p>
             
         </div>
     </div>
