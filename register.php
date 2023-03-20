@@ -1,6 +1,9 @@
 <?php 
 require'./config.php';
 
+if(!empty($_SESSION["id"])){
+    header("Location: dashboard.php");
+}
 if(isset($_POST['submit'])){
   $nome = $_POST["nome"];
   $cognome = $_POST["cognome"];
@@ -13,7 +16,7 @@ if(isset($_POST['submit'])){
   } else {
     $query = "INSERT INTO utenti (nome, cognome, email, password) VALUES('$nome', '$cognome','$email','$password' )";
     mysqli_query($conn, $query); 
-    echo "<script> alert('Registrazione avvenuta con successo'); </script>";
+    header("Location: dashboard.php");
   }
 }
 ?>

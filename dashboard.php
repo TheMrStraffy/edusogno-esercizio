@@ -1,3 +1,16 @@
+<?php 
+require './config.php';
+var_dump($_SESSION);
+if(!empty($_SESSION["id"])){
+  $id = $_SESSION["id"];
+  $result = mysqli_query($conn, "SELECT * FROM utenti WHERE id = $id");
+  $row = mysqli_fetch_assoc($result);
+
+} else {
+  // header("Location: login.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +34,10 @@
 <main>
 
     Profile Dashboard
+
+
+    <h1>Welcome <?php echo $row["nome"]; ?> </h1>
+    <a href="logout.php">Logout</a>
 </main>
 </body>
 

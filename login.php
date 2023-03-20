@@ -1,3 +1,28 @@
+<?php 
+require './config.php';
+if(!empty($_SESSION["id"])){
+    header("Location: dashboard.php");
+}
+if(isset($_POST['submit'])){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $result = mysqli_query($conn, "SELECT * FROM utenti WHERE email = '$email'");
+    $row = mysqli_fetch_assoc($result);
+    if(mysqli_num_rows($result) > 0){
+        if($password == $row["password"]){
+            $_SESSION["login"] = true;
+            $_SESSION["id"] = $row["id"];
+            header("Location: dashboard.php");
+        } else{
+            echo "<script> alert('Wrong Password'); </script>";
+        }
+
+    } else{
+        echo "<script> alert('User not registered'); </script>";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,10 +48,10 @@
     <div class="container">
         <h2>Hai gia un account?</h2>
         <div class="form-container">
-            <form action="">
+            <form action="" method="post">
 
                 <label for="email">Inserisci l'e-mail</label>
-                <input type="email" id="email" name="email" placeholder="name@example.com">
+                <input type="email" id="email" name="email" placeholder="name@example.com" required value="">
 
                 <label for="password">Inserisci la password</label>
                 <div class="container-pass">
@@ -34,12 +59,14 @@
                 <i onclick="showPassword()" class="fa-solid fa-eye" id="togglePassword"></i>
               </div>
 
-                <button type="submit">ACCEDI</button>
+                <button type="submit" name="submit">ACCEDI</button>
             </form>
 
-            <p>Non hai ancora un profilo? <a href="index.php">Registrati</a></p>
+            <p>Non hai ancora un profilo? <a href="register.php">Registrati</a></p>
             
-        </div>
+            
+            
+
     </div>
 </main>
 </body>
