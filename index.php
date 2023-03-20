@@ -1,5 +1,21 @@
 <?php 
+require'./config.php';
 
+if(isset($_POST['submit'])){
+  $nome = $_POST["nome"];
+  $cognome = $_POST["cognome"];
+  $email = $_POST["email"];
+  $password = $_POST["password"];
+
+  $duplicate = mysqli_query($conn, "SELECT * FROM utenti WHERE nome = '$nome' OR email = '$email'");
+  if(mysqli_num_rows($duplicate) > 0){
+  echo "<script> alert('Nome o Cognome o Email esiste'); </script>";
+  } else {
+    $query = "INSERT INTO utenti (nome, cognome, email, password) VALUES('$nome', '$cognome','$email','$password' )";
+    mysqli_query($conn, $query); 
+    echo "<script> alert('Registrazione avvenuta con successo'); </script>";
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,26 +43,28 @@
     <div class="container">
         <h2>Crea il tuo account</h2>
         <div class="form-container">
-            <form action="">
+            <form action="" method="post">
 
-              <label for="text">Inserisci il nome</label>
-              <input type="text" id="name" name="name" placeholder="Mario">
+              <label for="nome">Inserisci il nome</label>
+              <input type="text" id="nome" name="nome" placeholder="Mario" required value="">
 
-              <label for="email">Inserisci il cognome</label>
-              <input type="email" id="email" name="email" placeholder="Rossi">
+              <label for="cognome">Inserisci il cognome</label>
+              <input type="text" id="cognome" name="cognome" placeholder="Rossi" required value="">
 
               <label for="email">Inserisci l'e-mail</label>
-              <input type="email" id="email" name="email" placeholder="name@example.com">
-
+              <input type="email" id="email" name="email" placeholder="name@example.com" required value="">
 
               <label for="password">Inserisci la password</label>
-              <input type="password" id="password" name="password" placeholder="scrivila qui">
-              <i onclick="showPassword()" class="fa-solid fa-eye" id="togglePassword"></i>
 
-                <button type="submit">REGISTRATI</button>
+              <div class="container-pass">
+                <input type="password" id="password" name="password" placeholder="scrivila qui" required value="">
+                <i onclick="showPassword()" class="fa-solid fa-eye" id="togglePassword"></i>
+              </div>
+
+                <button type="submit" name="submit">REGISTRATI</button>
             </form>
 
-            <p>Hai gia un account? Accedi <a href="#">Accedi</a></p>
+            <p>Hai gia un account? Accedi <a href="login.php">Accedi</a></p>
             
         </div>
     </div>
@@ -57,6 +75,9 @@
     #togglePassword{
         margin-left: -30px;
         cursor: pointer;
+    }
+    .container-pass input{
+      width: 97%;
     }
 </style>
 

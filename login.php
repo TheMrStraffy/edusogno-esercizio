@@ -29,13 +29,15 @@
                 <input type="email" id="email" name="email" placeholder="name@example.com">
 
                 <label for="password">Inserisci la password</label>
-                <input type="password" id="password" name="password" placeholder="scrivila qui">
+                <div class="container-pass">
+                <input type="password" id="password" name="password" placeholder="scrivila qui" required value="">
                 <i onclick="showPassword()" class="fa-solid fa-eye" id="togglePassword"></i>
+              </div>
 
                 <button type="submit">ACCEDI</button>
             </form>
 
-            <p>Non hai ancora un profilo? <a href="#">Registrati</a></p>
+            <p>Non hai ancora un profilo? <a href="index.php">Registrati</a></p>
             
         </div>
     </div>
@@ -46,6 +48,9 @@
     #togglePassword{
         margin-left: -30px;
         cursor: pointer;
+    }
+    .container-pass input{
+      width: 97%;
     }
 </style>
 
