@@ -5,10 +5,10 @@ if(!empty($_SESSION["id"])){
     header("Location: dashboard.php");
 }
 if(isset($_POST['submit'])){
-  $nome = $_POST["nome"];
-  $cognome = $_POST["cognome"];
-  $email = $_POST["email"];
-  $password = $_POST["password"];
+  $nome = addslashes($_POST["nome"]);
+  $cognome = addslashes($_POST["cognome"]);
+  $email = addslashes($_POST["email"]);
+  $password = addslashes($_POST["password"]);
 
   $duplicate = mysqli_query($conn, "SELECT * FROM utenti WHERE nome = '$nome' OR email = '$email'");
   if(mysqli_num_rows($duplicate) > 0){

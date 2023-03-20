@@ -45,6 +45,7 @@ include_once './partials/header.php';
             </form>
 
             <p class="one-option">Non hai ancora un profilo? <a href="register.php">Registrati</a></p>
+            <p class="one-option">Hai dimenticato la tua password? <a href="sendreset.php">Clicca qui!</a></p>
             
             
             

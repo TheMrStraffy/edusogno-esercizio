@@ -1,11 +1,10 @@
 <?php 
 require './config.php';
-$userId= $_SESSION['id'];
-$getUserData = mysqli_query($conn, "SELECT email,password FROM utenti WHERE id='$userId'");
-$result = mysqli_fetch_array($getUserData);
-var_dump($result['email']);
 
 if(isset($_POST['password-reset'])){
+  $userId= $_SESSION['id'];
+  $getUserData = mysqli_query($conn, "SELECT email,password FROM utenti WHERE email='$email'");
+  $result = mysqli_fetch_array($getUserData);
 $new_password = $_POST['new-password'];
 $email = $result['email'];
 mysqli_query($conn, "UPDATE utenti set password='$new_password' WHERE email='$email'");
