@@ -1,14 +1,17 @@
 <?php 
 require './config.php';
-$email = $_POST["email"];
+$userId= $_SESSION['id'];
+$getUserData = mysqli_query($conn, "SELECT email,password FROM utenti WHERE id='$userId'");
+$result = mysqli_fetch_array($getUserData);
+var_dump($result['email']);
 
-if(!empty($email)){
-  $email = $_POST["email"];
-  $password = mysqli_query($conn, "SELECT password FROM utenti WHERE email = '$email'");
-  $row = mysqli_fetch_assoc($password);
-  $msg = "Hello , this is your forgotten password from our website! ---->" . $row['password'];
-  mail($email,'Forgotten Password', $msg);
-  var_dump($row['password']);
+if(isset($_POST['password-reset'])){
+$new_password = $_POST['new-password'];
+$email = $result['email'];
+mysqli_query($conn, "UPDATE utenti set password='$new_password' WHERE email='$email'");
+echo "<p>Password Changed!</p>";
+} else {
+echo "<p> Something went wrong </p>";
 }
 ?>
 
@@ -33,6 +36,19 @@ if(!empty($email)){
 </header>
 
 <main>
+
+<form action="" method="post">
+
+<p>Hai Dimenticato la tua password? Inserisci l'email</p>
+<label for="email">IChange password for this Email</label>
+<input type="email" id="email" name="email"   disabled value="<?php echo $result['email'] ?>">
+
+<label for="password">Change your pass</label>
+<input type="password" name="new-password" value="">
+
+
+<button type="submit" name="password-reset">Invia Link</button>
+</form>
 
     
 </main>
