@@ -1,7 +1,3 @@
-<?php 
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,28 +21,21 @@
 <main>
 
     <div class="container">
-        <h2>Crea il tuo account</h2>
+        <h2>Hai gia un account?</h2>
         <div class="form-container">
             <form action="">
 
-              <label for="text">Inserisci il nome</label>
-              <input type="text" id="name" name="name" placeholder="Mario">
+                <label for="email">Inserisci l'e-mail</label>
+                <input type="email" id="email" name="email" placeholder="name@example.com">
 
-              <label for="email">Inserisci il cognome</label>
-              <input type="email" id="email" name="email" placeholder="Rossi">
+                <label for="password">Inserisci la password</label>
+                <input type="password" id="password" name="password" placeholder="scrivila qui">
+                <i onclick="showPassword()" class="fa-solid fa-eye" id="togglePassword"></i>
 
-              <label for="email">Inserisci l'e-mail</label>
-              <input type="email" id="email" name="email" placeholder="name@example.com">
-
-
-              <label for="password">Inserisci la password</label>
-              <input type="password" id="password" name="password" placeholder="scrivila qui">
-              <i onclick="showPassword()" class="fa-solid fa-eye" id="togglePassword"></i>
-
-                <button type="submit">REGISTRATI</button>
+                <button type="submit">ACCEDI</button>
             </form>
 
-            <p>Hai gia un account? Accedi <a href="#">Accedi</a></p>
+            <p>Non hai ancora un profilo? <a href="#">Registrati</a></p>
             
         </div>
     </div>
