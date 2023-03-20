@@ -34,23 +34,7 @@ if(!empty($email)){
 
 <main>
 
-    <div class="container">
-        <h2>Hai gia un account?</h2>
-        <div class="form-container">
-          <p>Scrivi la tua email e manderemo il link con la password associata al tuo account</p>
-            <form action="" method="post">
-
-                <label for="email">Inserisci l'e-mail</label>
-                <input type="email" id="email" name="email" placeholder="name@example.com" required value="">
-
-
-                <button type="submit" name="submit">Invia Il Link</button>
-            </form>
-
-        </div>
-            
-
-    </div>
+    
 </main>
 </body>
 
