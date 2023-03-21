@@ -13,14 +13,14 @@ require 'vendor/autoload.php';
 function send_mail($email, $oggetto, $messaggio, $path_allegato = null){
   $mail = new PHPMailer(true);
     //Server settings
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'sandbox.smtp.mailtrap.io';                     //Set the SMTP server to send through
+    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = '1eb75a7f31333e';                     //SMTP username
-    $mail->Password   = '4fd5085cf039fe';                               //SMTP password
-    // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 2525;     
+    $mail->Username   = "thecrowstraffy@gmail.com";                     //SMTP username
+    $mail->Password   = "jixkhguzdkcxawjr";                               //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+    $mail->Port       = 587;     
     $mail->SMTPOptions = array(
       'ssl' => array(
           'verify_peer' => false,
@@ -30,11 +30,11 @@ function send_mail($email, $oggetto, $messaggio, $path_allegato = null){
   );                               //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('edusogno@example.com', 'Edusogno');
+    $mail->setFrom('thecrowstraffy@gmail.com', 'Carmelo');
     $mail->addAddress($email);
-    $mail->addReplyTo('info@example.com', 'Information');
-    $mail->addCC('cc@example.com');
-    $mail->addBCC('bcc@example.com');
+    // $mail->addReplyTo('info@example.com', 'Information');
+    // $mail->addCC('cc@example.com');
+    // $mail->addBCC('bcc@example.com');
 
     //Attachments
     // $mail->addAttachment($path_allegato);  
