@@ -48,7 +48,9 @@ function send_mail($email, $oggetto, $messaggio, $path_allegato = null){
     echo "Errore durante l'invio della mail : " . $mail->ErrorInfo;
       return false;
     } else {
-      echo "Check Your Email and Click on the link sent to your email";
+
+      
+      header("Location: sendreset.php?msg=success");
       return true;
   }
 }
