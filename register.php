@@ -40,7 +40,7 @@ include_once './partials/head.php'
     <div class="container">
         <h2>Crea il tuo account</h2>
         <div class="form-container">
-            <form action="" method="post">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 
               <label for="nome">Inserisci il nome</label>
               <input type="text" id="nome" name="nome" placeholder="Mario" required value="">

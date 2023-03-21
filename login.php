@@ -36,7 +36,7 @@ include_once './partials/header.php';
         ?>
         <h2>Hai gia un account?</h2>
         <div class="form-container">
-            <form action="" method="post">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 
                 <label for="email">Inserisci l'e-mail</label>
                 <input type="email" id="email" name="email" placeholder="name@example.com" required value="">

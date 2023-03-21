@@ -26,7 +26,7 @@ include_once './partials/header.php';
   <div class="container">
   <div class="form-container">
 
-    <form action="" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
     
     <p>Hai Dimenticato la tua password? Inserisci l'email</p>
     <label for="email">Inserisci l'e-mail</label>

@@ -25,9 +25,11 @@ include_once './partials/header.php';
 <main>
 
   <div class="dashboard-container">
-
-    <h2 class="welcome">Welcome <?php echo $row["nome"]; ?> </h2>
-    
+    <?php if(!empty($eventsResult)) : ?>
+    <h2 class="welcome">Ciao <?php echo $row["nome"]; ?> ecco i tuoi eventi </h2>
+    <?php else : ?>
+      <h2 class="welcome">Ciao <?php echo $row["nome"]; ?> Non ci sono eventi per ora. </h2>
+    <?php endif ?>
     <div class="card-container">
     <?php foreach ($eventsResult as $event): ?>
      
