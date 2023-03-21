@@ -23,7 +23,7 @@ include_once './partials/header.php';
 
 
 <main>
-
+  <?php include './partials/shapes.php' ?>
   <div class="dashboard-container">
     <?php if(!empty($eventsResult)) : ?>
     <h2 class="welcome">Ciao <?php echo $row["nome"]; ?> ecco i tuoi eventi </h2>

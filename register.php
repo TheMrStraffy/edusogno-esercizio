@@ -24,19 +24,15 @@ if(isset($_POST['submit'])){
   }
 }
 
-include_once './partials/head.php'
+include_once './partials/head.php';
+include_once './partials/header.php';
 ?>
 
 
-<header>
-<div class="logo">
-    Edu<br>
-    sogno
-</div>
-</header>
+
 
 <main>
-
+<?php include './partials/shapes.php' ?> 
     <div class="container">
         <h2>Crea il tuo account</h2>
         <div class="form-container">

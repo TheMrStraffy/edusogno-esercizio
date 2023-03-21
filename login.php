@@ -30,33 +30,34 @@ include_once './partials/header.php';
 
 <main>
 
-    <div class="container">
-        <?php if(!empty($successMessage))
-        echo $successMessage;
-        ?>
-        <h2>Hai gia un account?</h2>
-        <div class="form-container">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-
-                <label for="email">Inserisci l'e-mail</label>
-                <input type="email" id="email" name="email" placeholder="name@example.com" required value="">
-
-                <label for="password">Inserisci la password</label>
-                <div class="container-pass">
-                <input type="password" id="password" name="password" placeholder="scrivila qui" required value="">
-                <i onclick="showPassword()" class="fa-solid fa-eye" id="togglePassword"></i>
-              </div>
-
-                <button type="submit" name="submit">ACCEDI</button>
-            </form>
-
-            <p class="one-option">Non hai ancora un profilo? <a href="register.php">Registrati</a></p>
-            <p class="one-option">Hai dimenticato la tua password? <a href="sendreset.php">Clicca qui!</a></p>
-            
-            
-            
-
-    </div>
+        <?php include './partials/shapes.php' ?> 
+            <div class="container">
+                <?php if(!empty($successMessage))
+                echo $successMessage;
+                ?>
+                <h2>Hai gia un account?</h2>
+                <div class="form-container">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+        
+                        <label for="email">Inserisci l'e-mail</label>
+                        <input type="email" id="email" name="email" placeholder="name@example.com" required value="">
+        
+                        <label for="password">Inserisci la password</label>
+                        <div class="container-pass">
+                        <input type="password" id="password" name="password" placeholder="scrivila qui" required value="">
+                        <i onclick="showPassword()" class="fa-solid fa-eye" id="togglePassword"></i>
+                      </div>
+        
+                        <button type="submit" name="submit">ACCEDI</button>
+                    </form>
+        
+                    <p class="one-option">Non hai ancora un profilo? <a href="register.php">Registrati</a></p>
+                    <p class="one-option">Hai dimenticato la tua password? <a href="sendreset.php">Clicca qui!</a></p>
+                    
+                    
+                    
+        
+            </div>
 </main>
 </body>
 

@@ -26,6 +26,7 @@ include_once './partials/header.php';
 ?>
 
 <main>
+<?php include './partials/shapes.php' ?> 
   <div class="container">
   <div class="form-container">
 
