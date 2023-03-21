@@ -7,7 +7,6 @@ $msgError = '';
     $getUserData = mysqli_query($conn, "SELECT * FROM utenti WHERE email='$userEmail' AND reset_link_token='$token'");
     $dateNow= date("Y-m-d H:i:s");
     $result = mysqli_fetch_array($getUserData);
-    var_dump($result);
     if($result['exp_date'] >= $dateNow){
     
         if(isset($_POST['password-reset']) && isset($_POST['new-password'])){
