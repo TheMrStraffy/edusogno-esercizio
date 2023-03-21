@@ -4,6 +4,8 @@ nome varchar(45),
 cognome varchar(45),
 email varchar(255),
 password varchar(255),
+exp_date varchar(255),
+reset_link_token varchar(255),
 PRIMARY KEY (id)
 );
 

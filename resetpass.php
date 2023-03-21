@@ -1,19 +1,27 @@
 <?php 
 require './config.php';
 $msgError = '';
-  if(isset($_GET['email'])){
-    $userEmail = $_GET['email'];
-    $getUserData = mysqli_query($conn, "SELECT email,password FROM utenti WHERE email='$userEmail'");
+  if(isset($_GET['key']) && isset($_GET['token'])){
+    $userEmail = $_GET['key'];
+    $token = $_GET['token'];
+    $getUserData = mysqli_query($conn, "SELECT * FROM utenti WHERE email='$userEmail' AND reset_link_token='$token'");
+    $dateNow= date("Y-m-d H:i:s");
     $result = mysqli_fetch_array($getUserData);
-    if(isset($_POST['password-reset']) && isset($_POST['new-password'])){
-        $new_password = $_POST['new-password'];
-        mysqli_query($conn, "UPDATE utenti set password='$new_password' WHERE email='$userEmail'");
-        header("Location: login.php?message=success");
-    } 
-  } else {
-      $msgError = "<p> Something went wrong </p>";
-
-  }
+    var_dump($result);
+    if($result['exp_date'] >= $dateNow){
+    
+        if(isset($_POST['password-reset']) && isset($_POST['new-password'])){
+            $new_password = $_POST['new-password'];
+            mysqli_query($conn, "UPDATE utenti set password='$new_password' WHERE email='$userEmail'");
+            mysqli_query($conn, "UPDATE utenti set exp_date=null, reset_link_token=null WHERE email='$userEmail'");
+            header("Location: login.php?message=success");
+        } 
+      } else {
+          $msgError = "<p> Something went wrong </p>";
+      }
+    } else {
+    $msgError="<p> Token Expired! </p>";
+    }
 
 include_once './partials/head.php';
 include_once './partials/header.php';
@@ -26,7 +34,7 @@ include_once './partials/header.php';
 <div class="container">
 
   <div class="form-container">
-    <?php if(isset($_GET['email'])) : ?>
+    <?php if(isset($_GET['key'])) : ?>
     <form action="" method="post">
     
     <p>Hai Dimenticato la tua password? Inserisci l'email</p>
@@ -37,7 +45,7 @@ include_once './partials/header.php';
     <input type="password" name="new-password" value="">
     
     
-    <button type="submit" name="password-reset">Invia Link</button>
+    <button type="submit" name="password-reset">Reset Password</button>
     </form>
   </div>
   <?php else : ?>

@@ -2,18 +2,23 @@
 
 require './config.php';
 require './mailsender.php';
+
 if(isset($_GET['msg']) == 'success'){
   $succMsg= "Check Your Email and Click on the link sent to your email";
 }
-$succMsg= "Check Your Email and Click on the link sent to your email";
 if(isset($_POST['password-reset-token']) && $_POST['email']){
   $email = $_POST['email'];
   $result = mysqli_query($conn, "SELECT * FROM utenti WHERE email='$email'");
   $row = mysqli_fetch_array($result);
 
   if($row){
-    
-    $msg = "<a href=http://localhost/edusogno-esercizio/resetpass.php?email=". $email .">Click To Reset Password</a>";
+    $token = md5($email).rand(10,100);
+    $expFormat = mktime(
+      date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y")
+    );
+    $expDate = date("Y-m-d H:i:s",$expFormat);
+    $update = mysqli_query($conn, "UPDATE utenti set reset_link_token='$token', exp_date='$expDate' WHERE email='$email'");
+    $msg = "<a href=http://localhost/edusogno-esercizio/resetpass.php?key=". $email . "&token=". $token .">Click To Reset Password</a>";
     $res = send_mail($email, 'Link Reset Password', $msg, null);
   } else{
     $errMsg = 'Email Invalida';
